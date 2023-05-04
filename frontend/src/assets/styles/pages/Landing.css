@@ -1,0 +1,58 @@
+/* frontend/src/assets/styles/landing.css */
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .landing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+  
+  .landing-nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .landing-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 2rem;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .btn-sign-up,
+  .btn-sign-in {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn-sign-up {
+    background-color: #4caf50;
+  }
+  
+  .btn-sign-in {
+    background-color: #3f51b5;
+  }
+  

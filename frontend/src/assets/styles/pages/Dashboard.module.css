@@ -1,0 +1,41 @@
+/* src/assets/styles/pages/Dashboard.module.css */
+
+.dashboard {
+    display: flex;
+  }
+  
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 10px 0;
+  color: #000;
+  text-decoration: none;
+}
+
+.sidebar-link.active {
+  color: red;
+}
+
+.profileLink {
+  position: absolute;
+  bottom: 20px;
+}
+
+/* Add this new class */
+.closedSidebar {
+  width: 0;
+  overflow: hidden;
+}
+
+  
