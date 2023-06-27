@@ -1,0 +1,28 @@
+.storyList {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .storyItem {
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .storyItem.expanded {
+    padding-bottom: 48px;
+  }
+  
+  .progressContainer {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #ccc;
+  }
+  

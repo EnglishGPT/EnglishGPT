@@ -1,0 +1,830 @@
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\react-app-env.d.ts ##########
+/// <reference types="react-scripts" />
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\reportWebVitals.ts ##########
+import { ReportHandler } from 'web-vitals';
+
+const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\setupTests.ts ##########
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\App.test.tsx ##########
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\App.tsx ##########
+// frontend/src/App.tsx
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme/theme';
+import Landing from './pages/Landing';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import useProtectedRoute from './components/Common/ProtectedRoute';
+
+const App: React.FC = () => {
+  const isAuthenticated = true; // Replace with actual authentication status
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route
+            path="/dashboard/*"
+            element={
+              <>
+                {useProtectedRoute({ isAuthenticated })}
+                <Dashboard />
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {useProtectedRoute({ isAuthenticated })}
+                <Profile />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
+};
+
+export default App;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\index.tsx ##########
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Common\Footer.tsx ##########
+ 
+// frontend/src/components/Common/Footer.tsx
+
+import React from 'react';
+
+const Footer: React.FC = () => {
+  return (
+    <footer>
+      <p>&copy; 2023 My App. All rights reserved.</p>
+      {/* Add additional footer content here */}
+    </footer>
+  );
+};
+
+export default Footer;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Common\Header.tsx ##########
+// frontend/src/components/Common/Header.tsx
+
+import React from 'react';
+
+const Header: React.FC = () => {
+  return (
+    <header>
+      <h1>My App</h1>
+      {/* Add navigation links and other header content here */}
+    </header>
+  );
+};
+
+export default Header;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Common\Loading.tsx ##########
+ // frontend/src/components/Common/Loading.tsx
+
+import React from 'react';
+
+const Loading: React.FC = () => {
+  return (
+    <div className="loading">
+      <p>Loading...</p>
+    </div>
+  );
+};
+
+export default Loading;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Common\ProtectedRoute.tsx ##########
+// frontend/src/components/Common/useProtectedRoute.ts
+
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+interface UseProtectedRouteProps {
+  isAuthenticated: boolean;
+}
+
+const useProtectedRoute = ({ isAuthenticated }: UseProtectedRouteProps) => {
+  const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    if (!isAuthenticated) {
+      return <Navigate to="/" replace />;
+    }
+    return <>{children}</>;
+  };
+
+  return ProtectedRoute;
+};
+
+export default useProtectedRoute;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Exam\ExamSelection.tsx ##########
+// frontend/src/components/Exam/ExamSelection.tsx
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const ExamSelection: React.FC = () => {
+  const navigate = useNavigate();
+
+  const navigateToExam = (examType: string) => {
+    navigate(`/exam/${examType}`);
+  };
+
+  return (
+    <div>
+      <h2>Select an Exam Type</h2>
+      <button onClick={() => navigateToExam('vocabulary')}>Vocabulary Exam</button>
+      <button onClick={() => navigateToExam('sentence')}>Sentence Exam</button>
+      <button onClick={() => navigateToExam('grammar')}>Grammar Exam</button>
+    </div>
+  );
+};
+
+export default ExamSelection;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Exam\GrammarExam.tsx ##########
+// frontend/src/components/Exam/GrammarExam.tsx
+
+import React from 'react';
+
+const GrammarExam: React.FC = () => {
+  const questions = [
+    { question: 'Is this sentence correct?', sentence: 'I likes apples.', answer: 'No' },
+    { question: 'Is this sentence correct?', sentence: 'She is eating a banana.', answer: 'Yes' },
+    { question: 'Is this sentence correct?', sentence: 'He buy some oranges.', answer: 'No' },
+  ];
+
+  return (
+    <div>
+      <h2>Grammar Exam</h2>
+      <ul>
+        {questions.map((question, index) => (
+          <li key={index}>
+            {question.question} "{question.sentence}" - Correct answer: {question.answer}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default GrammarExam;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Exam\SentenceExam.tsx ##########
+// frontend/src/components/Exam/SentenceExam.tsx
+
+import React from 'react';
+
+const SentenceExam: React.FC = () => {
+  const questions = [
+    { sentence: 'I like apples.', translation: '我喜欢苹果。' },
+    { sentence: 'She is eating a banana.', translation: '她正在吃香蕉。' },
+    { sentence: 'He bought some oranges.', translation: '他买了一些橙子。' },
+  ];
+
+  return (
+    <div>
+      <h2>Sentence Exam</h2>
+      <ul>
+        {questions.map((question, index) => (
+          <li key={index}>
+            {question.sentence} - {question.translation}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SentenceExam;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\Exam\VocabularyExam.tsx ##########
+// frontend/src/components/Exam/VocabularyExam.tsx
+
+import React from 'react';
+
+const VocabularyExam: React.FC = () => {
+  const questions = [
+    { word: 'apple', answer: '苹果' },
+    { word: 'banana', answer: '香蕉' },
+    { word: 'orange', answer: '橙子' },
+  ];
+
+  return (
+    <div>
+      <h2>Vocabulary Exam</h2>
+      <ul>
+        {questions.map((question, index) => (
+          <li key={index}>
+            {question.word} - {question.answer}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default VocabularyExam;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\ReadStory\StorySection.tsx ##########
+import React from 'react';
+
+interface StorySectionProps {
+  englishText: string;
+  chineseText: string;
+  vocabList: { word: string; translation: string }[];
+}
+
+const StorySection: React.FC<StorySectionProps> = ({ englishText, chineseText, vocabList }) => {
+  return (
+    <div className="story-section">
+      <div className="text">
+        <p className="english">{englishText}</p>
+        <p className="chinese">{chineseText}</p>
+      </div>
+      <div className="vocab-list">
+        <h3>Vocabulary List</h3>
+        <ul>
+          {vocabList.map((vocab, index) => (
+            <li key={index}>
+              {vocab.word} - {vocab.translation}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default StorySection;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\ReadStory\VocabularyList.tsx ##########
+// frontend/src/components/ReadStory/VocabularyList.tsx
+
+import React from 'react';
+
+interface VocabularyListProps {
+  vocabList: { word: string; translation: string }[];
+}
+
+const VocabularyList: React.FC<VocabularyListProps> = ({ vocabList }) => {
+  return (
+    <div className="vocab-list">
+      <h3>Vocabulary List</h3>
+      <ul>
+        {vocabList.map((vocab, index) => (
+          <li key={index}>
+            {vocab.word} - {vocab.translation}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default VocabularyList;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\ShareStory\ShareButton.tsx ##########
+// frontend/src/components/ShareStory/ShareButton.tsx
+
+import React, { useState } from 'react';
+import ShareModal from './ShareModal';
+
+const ShareButton: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <>
+      <button onClick={toggleModal}>Share</button>
+      {isOpen && <ShareModal closeModal={toggleModal} />}
+    </>
+  );
+};
+
+export default ShareButton;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\components\ShareStory\ShareModal.tsx ##########
+// frontend/src/components/ShareStory/ShareModal.tsx
+
+import React from 'react';
+
+interface ShareModalProps {
+  closeModal: () => void;
+}
+
+const ShareModal: React.FC<ShareModalProps> = ({ closeModal }) => {
+  const shareUrl = "https://example.com/share/your-story-id"; // Replace with the actual URL to share.
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(shareUrl).then(
+      () => {
+        alert('Link copied to clipboard');
+      },
+      (err) => {
+        console.error('Could not copy text: ', err);
+      }
+    );
+  };
+
+  return (
+    <div>
+      <h3>Share this Story</h3>
+      <p>Copy the link below:</p>
+      <input type="text" value={shareUrl} readOnly />
+      <button onClick={copyToClipboard}>Copy</button>
+      {/* You can add social media sharing buttons here */}
+      <button onClick={closeModal}>Close</button>
+    </div>
+  );
+};
+
+export default ShareModal;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\pages\Dashboard.tsx ##########
+import React, { useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import ReadStoryUI from './ReadStoryUI';
+import ExamSelection from '../components/Exam/ExamSelection';
+import Profile from './Profile';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Container from '@mui/material/Container';
+
+const Dashboard: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const navigate = useNavigate();
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <AppBar position="fixed">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" onClick={toggleSidebar}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6">Dashboard</Typography>
+        </Toolbar>
+      </AppBar>
+      <Box component="nav" sx={{ width: isSidebarOpen ? 240 : 0, transition: 'width 0.3s' }}>
+        <List>
+          <ListItem button onClick={() => navigate('/dashboard/home')}>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button onClick={() => navigate('/dashboard/exams')}>
+            <ListItemText primary="Exams" />
+          </ListItem>
+          <ListItem button onClick={() => navigate('/dashboard/stories')}>
+            <ListItemText primary="Stories" />
+          </ListItem>
+          <ListItem button onClick={() => navigate('/dashboard/profile')}>
+            <ListItemText primary="Profile" />
+          </ListItem>
+        </List>
+      </Box>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '64px' }}>
+        <Routes>
+          <Route path="home" element={<div>Dashboard Home</div>} />
+          <Route path="exams" element={<ExamSelection />} />
+          <Route path="stories" element={<ReadStoryUI />} />
+          <Route path="profile" element={<Profile />} />
+        </Routes>
+      </Box>
+    </Box>
+  );
+};
+
+export default Dashboard;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\pages\Landing.tsx ##########
+import React from 'react';
+import { Link } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+
+const Landing: React.FC = () => {
+  return (
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            App Logo
+          </Typography>
+          <Button component={Link} to="/signup" color="inherit">
+            Sign Up
+          </Button>
+          <Button component={Link} to="/signin" color="inherit">
+            Sign In
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Container>
+        <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <Typography variant="h1" component="h1" gutterBottom>
+            English GPT
+          </Typography>
+          <Typography variant="h6" component="p" gutterBottom>
+            人大附中学生这样学习英语
+          </Typography>
+          <Typography variant="h6" component="p" gutterBottom>
+            The state-of-the-art way to study English in the era of AIGC
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+            <Button component={Link} to="/signup" variant="contained">
+              Sign Up
+            </Button>
+            <Button component={Link} to="/signin" variant="outlined">
+              Sign In
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </div>
+  );
+};
+
+export default Landing;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\pages\Profile.tsx ##########
+// frontend/src/pages/Profile.tsx
+import React from 'react';
+import styles from '../assets/styles/pages/Profile.module.css';
+
+// Replace with the actual user data fetched from your API
+const userData = {
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'johndoe@example.com',
+  profileImage: 'https://via.placeholder.com/200',
+  studyProgress: 75, // percentage
+  vocabulariesStudied: 120,
+  storiesRead: 15,
+  storiesShared: 5,
+  tokensAvailable: 250,
+};
+
+const Profile: React.FC = () => {
+  return (
+    <div className={styles.container}>
+      <img
+        src={userData.profileImage}
+        alt="Profile"
+        className={styles.profileImage}
+      />
+      <div className={styles.userInfo}>
+        <div>
+          <span className={styles.label}>Name: </span>
+          {userData.firstName} {userData.lastName}
+        </div>
+        <div>
+          <span className={styles.label}>Email: </span>
+          {userData.email}
+        </div>
+        <div>
+          <span className={styles.label}>Study Progress: </span>
+          {userData.studyProgress}%
+        </div>
+        <div>
+          <span className={styles.label}>Vocabularies Studied: </span>
+          {userData.vocabulariesStudied}
+        </div>
+        <div>
+          <span className={styles.label}>Stories Read: </span>
+          {userData.storiesRead}
+        </div>
+        <div>
+          <span className={styles.label}>Stories Shared: </span>
+          {userData.storiesShared}
+        </div>
+        <div>
+          <span className={styles.label}>Tokens Available: </span>
+          {userData.tokensAvailable}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Profile;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\pages\ReadStoryUI.tsx ##########
+// frontend/src/pages/ReadStoryUI.tsx
+
+import React from 'react';
+import StorySection from '../components/ReadStory/StorySection';
+import VocabularyList from '../components/ReadStory/VocabularyList';
+
+const ReadStoryUI: React.FC = () => {
+  // ... your existing code
+  // Mock data for demonstration purposes
+  const englishText = 'The brave astronaut fought the aliens.';
+  const chineseText = '勇敢的宇航员与外星人作战。';
+  const vocabList = [
+    { word: 'brave', translation: '勇敢' },
+    { word: 'astronaut', translation: '宇航员' },
+    { word: 'fought', translation: '作战' },
+    { word: 'aliens', translation: '外星人' },
+  ];
+
+  return (
+    <div>
+      <h1>Read Story</h1>
+      <StorySection
+        englishText={englishText}
+        chineseText={chineseText}
+        vocabList={vocabList}
+      />
+      <VocabularyList vocabList={vocabList} />
+    </div>
+  );
+};
+
+export default ReadStoryUI;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\pages\SignIn.tsx ##########
+// frontend/src/pages/SignIn.tsx
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const SignIn: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Perform authentication here, and if successful:
+    navigate('/dashboard');
+  };
+
+  return (
+    <div>
+      <h1>Sign In</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <br />
+        <label htmlFor="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <br />
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  );
+};
+
+export default SignIn;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\pages\SignUp.tsx ##########
+// frontend/src/pages/SignUp.tsx
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Perform user registration here, and if successful:
+    navigate('/dashboard');
+  };
+
+  return (
+    <div>
+      <h1>Sign Up</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <br />
+        <label htmlFor="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <br />
+        {/* Include any other required information fields */}
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  );
+};
+
+export default SignUp;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\store\exam.ts ##########
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface ExamState {
+  exams: any[];
+  error: string | null;
+}
+
+const initialState: ExamState = {
+  exams: [],
+  error: null,
+};
+
+const examSlice = createSlice({
+  name: 'exam',
+  initialState,
+  reducers: {
+    setExams: (state, action: PayloadAction<any[]>) => {
+      state.exams = action.payload;
+      state.error = null;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+  },
+});
+
+export const { setExams, setError } = examSlice.actions;
+
+export default examSlice.reducer;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\store\rootReducer.ts ##########
+import { combineReducers } from '@reduxjs/toolkit';
+import userReducer from './user';
+import examReducer from './exam';
+import storyReducer from './story';
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  exam: examReducer,
+  story: storyReducer,
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+
+export default rootReducer;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\store\story.ts ##########
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface StoryState {
+  stories: any[];
+  error: string | null;
+}
+
+const initialState: StoryState = {
+  stories: [],
+  error: null,
+};
+
+const storySlice = createSlice({
+  name: 'story',
+  initialState,
+  reducers: {
+    setStories: (state, action: PayloadAction<any[]>) => {
+      state.stories = action.payload;
+      state.error = null;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+  },
+});
+
+export const { setStories, setError } = storySlice.actions;
+
+export default storySlice.reducer;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\store\user.ts ##########
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface UserState {
+  loggedIn: boolean;
+  userData: any;
+  error: string | null;
+}
+
+const initialState: UserState = {
+  loggedIn: false,
+  userData: null,
+  error: null,
+};
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<any>) => {
+      state.loggedIn = true;
+      state.userData = action.payload;
+      state.error = null;
+    },
+    setLogout: (state) => {
+      state.loggedIn = false;
+      state.userData = null;
+      state.error = null;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+  },
+});
+
+export const { setUser, setLogout, setError } = userSlice.actions;
+
+export default userSlice.reducer;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\theme\theme.ts ##########
+import { createTheme } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4fc3f7', // Sky light blue
+    },
+  },
+});
+
+export default theme;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\utils\api.ts ##########
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'https://your-api-base-url.com',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Add an interceptor to handle API errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Handle errors, such as showing a notification or logging the error
+    console.error('API error:', error);
+    return Promise.reject(error);
+  }
+);
+
+export const signUp = async (data: any) => {
+  const response = await api.post('/signup', data);
+  return response.data;
+};
+
+export const signIn = async (data: any) => {
+  const response = await api.post('/signin', data);
+  return response.data;
+};
+
+// Add more API functions as needed
+
+export default api;
+############################ code for F:\entrepreneur\EnglishGPT\frontend\src\utils\formatDate.ts ##########
+const formatDate = (date: Date | string, options?: Intl.DateTimeFormatOptions) => {
+    const defaultOptions: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+  
+    const mergedOptions = { ...defaultOptions, ...options };
+  
+    return new Intl.DateTimeFormat('en-US', mergedOptions).format(new Date(date));
+  };
+  
+  export default formatDate;
+  

@@ -29,7 +29,7 @@ const Landing: React.FC = () => {
             English GPT
           </Typography>
           <Typography variant="h6" component="p" gutterBottom>
-            人大附中学生这样学习英语
+            Learn English Like a GPT God
           </Typography>
           <Typography variant="h6" component="p" gutterBottom>
             The state-of-the-art way to study English in the era of AIGC

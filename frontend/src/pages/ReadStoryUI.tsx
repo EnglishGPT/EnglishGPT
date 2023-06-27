@@ -1,8 +1,8 @@
 // frontend/src/pages/ReadStoryUI.tsx
-
 import React from 'react';
 import StorySection from '../components/ReadStory/StorySection';
 import VocabularyList from '../components/ReadStory/VocabularyList';
+import { Typography, Box } from '@mui/material';
 
 const ReadStoryUI: React.FC = () => {
   // ... your existing code
@@ -17,15 +17,17 @@ const ReadStoryUI: React.FC = () => {
   ];
 
   return (
-    <div>
-      <h1>Read Story</h1>
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        Read Story
+      </Typography>
       <StorySection
         englishText={englishText}
         chineseText={chineseText}
         vocabList={vocabList}
       />
       <VocabularyList vocabList={vocabList} />
-    </div>
+    </Box>
   );
 };
 

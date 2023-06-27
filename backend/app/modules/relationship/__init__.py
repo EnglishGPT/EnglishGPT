@@ -1,0 +1,1 @@
+from .relationship_controller import relationship_blueprint

@@ -1,0 +1,51 @@
+/* Students.module.css */
+
+.accordionContainer {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  }
+  
+  .accordionSummary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .accordionDetails {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .studentAvatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+  }
+  
+  .studentInfo {
+    flex-grow: 1;
+  }
+  
+  .studentButton {
+    margin: 0 10px;
+  }
+  
+  .pageContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .tablePagination {
+    margin-top: 20px;
+  }
+  
