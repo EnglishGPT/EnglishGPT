@@ -1,0 +1,94 @@
+├── frontend
+│   ├── src
+│   │   ├── assets
+│   │   │   └── styles
+│   │   │       ├── pages
+│   │   │       │   ├── Landings.css
+│   │   │       │   ├── Profile.module.css
+│   │   │       │   └── Dashboard.module.css
+│   │   │       ├── components
+│   │   │       │   ├── GenerateStory.module.css
+│   │   │       │   ├── Story.module.css
+│   │   │       │   ├── StoryList.module.css
+│   │   │       │   └── StoryReader.module.css
+│   │   │       └── index.css
+│   │   ├── components
+│   │   │   ├── ReadStory
+│   │   │   │   ├── StorySection.tsx
+│   │   │   │   └── VocabularyList.tsx
+│   │   │   ├── Exam
+│   │   │   │   ├── ExamSelection.tsx
+│   │   │   │   ├── VocabularyExam.tsx
+│   │   │   │   ├── SentenceExam.tsx
+│   │   │   │   └── GrammarExam.tsx
+│   │   │   ├── ShareStory
+│   │   │   │   ├── ShareButton.tsx
+│   │   │   │   └── ShareModal.tsx
+│   │   │   ├── Common
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Footer.tsx
+│   │   │   │   ├── Loading.tsx
+│   │   │   │   └── ProtectedRoute.tsx
+│   │   │   ├── Story
+│   │   │   │   ├── GenerateStory.tsx
+│   │   │   │   ├── StoryList.tsx
+│   │   │   │   └── StoryReader.tsx
+│   │   ├── pages
+│   │   │   ├── Landing.tsx
+│   │   │   ├── SignUp.tsx
+│   │   │   ├── SignIn.tsx
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── Profile.tsx
+│   │   │   └── ReadStoryUI.tsx
+│   │   ├── store
+│   │   │   ├── rootReducer.ts
+│   │   │   ├── user.ts
+│   │   │   ├── exam.ts
+│   │   │   └── story.ts
+│   │   ├── utils
+│   │   │   ├── api.ts
+│   │   │   └── formatDate.ts
+│   │   ├── theme
+│   │   │   └── theme.ts
+│   │   ├── App.tsx
+│   │   └── index.tsx
+├── backend
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── modules
+│   │   │   ├── auth
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── auth_controller.py
+│   │   │   │   ├── auth_middleware.py
+│   │   │   │   └── auth_service.py
+│   │   │   ├── exam
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── exam_controller.py
+│   │   │   │   ├── exam_model.py
+│   │   │   │   └── exam_service.py
+│   │   │   ├── story
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── story_controller.py
+│   │   │   │   ├── story_model.py
+│   │   │   │   └── story_service.py
+│   │   │   ├── relationship
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── relationship_controller.py
+│   │   │   │   ├── relationship_model.py
+│   │   │   │   └── relationship_service.py
+│   │   │   └── user
+│   │   │       ├── __init__.py
+│   │   │       ├── user_controller.py
+│   │   │       ├── user_model.py
+│   │   │       └── user_service.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── db.py
+│   │       ├── gpt.py
+│   │       └── social_media.py
+│   ├── config.py
+│   ├── wsgi.py
+│   ├── .gitignore
+│   └── README.md
+├── .gitignore
+└── README.md
