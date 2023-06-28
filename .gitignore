@@ -5,6 +5,9 @@
 *.DS_Store
 *.env
 
+# Root file
+/node_modules
+
 # Frontend
 /frontend/node_modules/
 /frontend/build/
@@ -18,6 +21,9 @@
 /backend/venv/
 *.sqlite
 *.pyc
+
+# private
+/developer_private/*
 
 # IDE-specific
 .vscode/
