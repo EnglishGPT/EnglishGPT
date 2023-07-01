@@ -1,26 +1,27 @@
-# General
-*.log
+# Python
 *.pyc
 *.pyo
+__pycache__/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# General
+*.log
 *.DS_Store
 *.env
 
-# Root file
-/node_modules
-
-# Frontend
-/frontend/node_modules/
-/frontend/build/
-/frontend/.eslintcache
-
-# Backend
-/backend/venv/
-/backend/__pycache__/
+# Flask
 /backend/migrations/
 /backend/instance/
-/backend/venv/
 *.sqlite
-*.pyc
 
 # private
 /developer_private/*
