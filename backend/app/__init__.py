@@ -12,12 +12,18 @@ from flask_cors import CORS
 from .utils.db import db
 from flask_login import LoginManager
 
+from loguru import logger
+import logging
+
 
 # Initialize the LoginManager
 login_manager = LoginManager()
 from sqlalchemy.exc import OperationalError
 
 def populate_users(db):
+    """
+    Create some placeholder users in the database
+    """
     from app.modules.user.user_model import User, UserType
     import random
     import string
@@ -47,6 +53,9 @@ def create_app(config_filename):
     app.config.from_pyfile(config_filename)
     app.secret_key = app.config['SECRET_KEY']
     
+    app.logger
+    # Allow access from frontend
+    # TODO: change when deployed
     CORS(app, resources={r"/*": {"origins": "*"}})
     app.debug = True
 
@@ -54,13 +63,23 @@ def create_app(config_filename):
 
     # Initialize the LoginManager with the app
     login_manager.init_app(app)
-    login_manager.login_view = 'auth.signin'  # The name of the view function for the login route
+    login_manager.login_view = 'auth.signin'  # type: ignore # The name of the view function for the login route
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(relationship_blueprint)
     # app.register_blueprint(story_blueprint)
     # app.register_blueprint(exam_blueprint)
+
+    # Config logger, using loguru instead of default
+    logger.start(app.config["LOG_FILE"], level=app.config["LOG_LEVEL"], backtrace=app.config["LOG_BACKTRACE"], rotation="25MB")
+    class LogHandler(logging.Handler):
+        def emit(self, record):
+            opt = logger.opt(depth=6, exception=record.exc_info)
+            opt.log(record.levelno, record.getMessage())
+    app.logger.addHandler(LogHandler())
+
+    logger.info("App created")
 
     @login_manager.user_loader
     def load_user(user_id):

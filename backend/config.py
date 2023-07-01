@@ -18,3 +18,8 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://root:Waipo500503!@localhost/test_db'
 # Set this to False to disable tracking modifications for SQLAlchemy models
 # It helps to save system resources since tracking modifications can be resource-intensive
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Logging config
+LOG_FILE = "backend.log"
+LOG_BACKTRACE = True
+LOG_LEVEL = "DEBUG"
